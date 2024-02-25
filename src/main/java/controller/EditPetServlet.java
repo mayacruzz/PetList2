@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.ListPet;
+
 /**
  * Servlet implementation class EditPetServlet
  */
-@WebServlet("/EditPetServlet")
+@WebServlet("/editPetServlet")
 public class EditPetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,8 +36,20 @@ public class EditPetServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ListPetHelper dao = new ListPetHelper();
+        String species = request.getParameter("species");
+        String gender = request.getParameter("gender");
+        int age = Integer.parseInt(request.getParameter("age"));
+        Integer tempId = Integer.parseInt(request.getParameter("id"));
+
+        ListPet petToUpdate = dao.searchForPetById(tempId);
+        petToUpdate.setSpecies(species);
+        petToUpdate.setGender(gender);
+        petToUpdate.setAge(age);
+
+        dao.updatePet(petToUpdate);
+
+        getServletContext().getRequestDispatcher("/viewAllPetsServlet").forward(request, response);
 	}
 
 }
