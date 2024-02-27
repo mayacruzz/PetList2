@@ -27,7 +27,10 @@ public class ListDetails {
     @ManyToOne (cascade=CascadeType.PERSIST)   
 	private Shopper shopper;
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+
 	private List<ListPet> listOfListPets;
+
+	private List<ListPet> listOfPet;
 	
 	//Default constructor
 	public ListDetails() {
@@ -67,6 +70,12 @@ public class ListDetails {
 
 	public void setListOfListPets(List<ListPet> listOfListPets) {
 		this.listOfListPets = listOfListPets;
+	public List<ListPet> getListOfPet() {
+		return listOfPet;
+	}
+
+	public void setListOfPet(List<ListPet> listOfPet) {
+		this.listOfPet = listOfPet;
 	}
 
 	public Shopper getShopper() {
@@ -85,6 +94,10 @@ public class ListDetails {
 	}
 
 	public ListDetails(int id, String listName, LocalDate date, Shopper shopper, List<ListPet> listOfListPets) {
+				+ ", listOfPet=" + listOfPet + "]";
+	}
+
+	public ListDetails(int id, String listName, LocalDate date, Shopper shopper, List<ListPet> listOfPet) {
 		   this.id = id;
 	       this.listName = listName;
 	       this.date = date;
@@ -96,6 +109,13 @@ public class ListDetails {
 	       this.date = date;
 	       this.shopper = shopper;
 	       this.listOfListPets = listOfListPets; 
+	       this.listOfPet = listOfPet; 
+	}
+	public ListDetails(String listName, LocalDate date, Shopper shopper, List<ListPet> listOfPet) {
+		   this.listName = listName;
+	       this.date = date;
+	       this.shopper = shopper;
+	       this.listOfPet = listOfPet; 
 			         
 	}
 	public ListDetails(String listName, LocalDate date, Shopper shopper) {
