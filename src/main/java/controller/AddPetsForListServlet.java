@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddPetsForListServlet
  */
-@WebServlet("/AddPetsForListServlet")
+@WebServlet("/addPetsForListServlet")
 public class AddPetsForListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,6 +28,12 @@ public class AddPetsForListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ListPetHelper dao = new ListPetHelper();
+		request.setAttribute("allItems", dao.showAllPets());
+		if(dao.showAllPets().isEmpty()){
+			request.setAttribute("allItems", " ");
+			}
+		getServletContext().getRequestDispatcher("/new-list.jsp").forward(request, response);
 	}
 
 	/**
