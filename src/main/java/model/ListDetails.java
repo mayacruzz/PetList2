@@ -26,12 +26,9 @@ public class ListDetails {
 	private LocalDate date;
     @ManyToOne (cascade=CascadeType.PERSIST)   
 	private Shopper shopper;
-    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-
+    @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	private List<ListPet> listOfListPets;
-
-	private List<ListPet> listOfPet;
-	
+   
 	//Default constructor
 	public ListDetails() {
 		super();
@@ -70,12 +67,6 @@ public class ListDetails {
 
 	public void setListOfListPets(List<ListPet> listOfListPets) {
 		this.listOfListPets = listOfListPets;
-	public List<ListPet> getListOfPet() {
-		return listOfPet;
-	}
-
-	public void setListOfPet(List<ListPet> listOfPet) {
-		this.listOfPet = listOfPet;
 	}
 
 	public Shopper getShopper() {
@@ -86,43 +77,41 @@ public class ListDetails {
 		this.shopper = shopper;
 	}
 	
-
-	@Override
+	
+	
+    @Override
 	public String toString() {
 		return "ListDetails [id=" + id + ", listName=" + listName + ", date=" + date + ", shopper=" + shopper
 				+ ", listOfListPets=" + listOfListPets + "]";
 	}
 
 	public ListDetails(int id, String listName, LocalDate date, Shopper shopper, List<ListPet> listOfListPets) {
-				+ ", listOfPet=" + listOfPet + "]";
+		super();
+		this.id = id;
+		this.listName = listName;
+		this.date = date;
+		this.shopper = shopper;
+		this.listOfListPets = listOfListPets;
 	}
 
-	public ListDetails(int id, String listName, LocalDate date, Shopper shopper, List<ListPet> listOfPet) {
-		   this.id = id;
-	       this.listName = listName;
-	       this.date = date;
-	       this.shopper = shopper;
-	       this.listOfListPets = listOfListPets; 
-	}
-	public ListDetails(String listName, LocalDate date, Shopper shopper, List<ListPet> listOfListPets) {
-		   this.listName = listName;
-	       this.date = date;
-	       this.shopper = shopper;
-	       this.listOfListPets = listOfListPets; 
-	       this.listOfPet = listOfPet; 
-	}
-	public ListDetails(String listName, LocalDate date, Shopper shopper, List<ListPet> listOfPet) {
-		   this.listName = listName;
-	       this.date = date;
-	       this.shopper = shopper;
-	       this.listOfPet = listOfPet; 
-			         
-	}
-	public ListDetails(String listName, LocalDate date, Shopper shopper) {
-		this.listName = listName;
+	public ListDetails(int id, String listName, LocalDate date, Shopper shopper) {
+        this.id = id;
+        this.listName = listName;
         this.date = date;
         this.shopper = shopper;
-	}
-	
+    }
+
+    public ListDetails(String listName, LocalDate date, Shopper shopper, List<ListPet> listOfListPets) {
+        this.listName = listName;
+        this.date = date;
+        this.shopper = shopper;
+        this.listOfListPets = listOfListPets; 
+    }
+
+    public ListDetails(String listName, LocalDate date, Shopper shopper) {
+        this.listName = listName;
+        this.date = date;
+        this.shopper = shopper;
+    }
   
 }
